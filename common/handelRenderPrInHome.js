@@ -1,14 +1,10 @@
-const handleRenderProduct = (datas, parentElement, isSlickSlider = false) => {
+const handleRenderPrInHome = (datas, parentElement) => {
     const result = datas.map((product) => {
-        return `<div class="${
-            isSlickSlider
-                ? "item-slick2 p-l-15 p-r-15"
-                : "col-sm-12 col-md-6 col-lg-4 p-b-50"
-        }">
+        return `<div class="item-slick2 p-l-15 p-r-15">
         <!-- Block2 -->
         <div class="block2">
-            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                <img src="images/item-01.jpg" alt="IMG-PRODUCT">
+            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                <img src="images/item-03.jpg" alt="IMG-PRODUCT">
 
                 <div class="block2-overlay trans-0-4">
                     <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -26,7 +22,7 @@ const handleRenderProduct = (datas, parentElement, isSlickSlider = false) => {
             </div>
 
             <div class="block2-txt p-t-20">
-                <a href="product-detail.html?id=${product.idProduct}" class="block2-name dis-block s-text3 p-b-5">
+                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
                     ${product.title}
                 </a>
 
@@ -39,4 +35,4 @@ const handleRenderProduct = (datas, parentElement, isSlickSlider = false) => {
     });
     parentElement.innerHTML = result.join("");
 };
-export default handleRenderProduct
+export default handleRenderPrInHome

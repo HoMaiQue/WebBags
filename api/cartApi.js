@@ -9,7 +9,13 @@ class Cart {
         let url = `cart/idProduct/${id}`;
         return axiosClient.delete(url);
     }
+    addCart = (cart) => {
+            let url = "/cart";
+            return axiosClient.post(url, cart);
+       
+    };
 }
 const cartsAPI = new Cart();
 
 export default cartsAPI;
+
