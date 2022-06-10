@@ -60,8 +60,8 @@ const logIn = async (userName, password) => {
         if (result && result.length > 0) {
             if (result[0].idRole === 1) {
             }
-            localStorage.setItem("userId", result[0].idUser);
-            localStorage.setItem("userName", result[0].username);
+            localStorage.clear()
+            localStorage.setItem("userInfo", JSON.stringify(result[0]));
             window.location.href = "index.html";
             userNameEl.value = "";
             passwordEl.value = "";
@@ -73,3 +73,4 @@ const logIn = async (userName, password) => {
 signInBtn.addEventListener("click", () => {
     logIn(userNameValue, passwordValue);
 });
+
