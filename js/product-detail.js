@@ -102,13 +102,15 @@ const getProduct = async () => {
 
 getProduct();
 
-let idUser = localStorage.getItem("userId");
+let idUser = localStorage.getItem("userInfo");
 
+
+let infoUser = JSON.parse(idUser)
 
 const addCart = async (idUser, idProduct, quantity) => {
     try {
         const cart = {
-            idUser: idUser,
+            idUser: infoUser.idUser,
             idProduct: idProduct,
 			quantity: quantity
         };
