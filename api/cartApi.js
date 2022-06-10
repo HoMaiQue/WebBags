@@ -1,15 +1,21 @@
 import axiosClient from "./axiosClient.js";
 
 class Cart {
+    getCartById = (id) => {
+        let url = `/cart/${id}`;
+        return axiosClient.get(url);
+    };
+    deleteProductById = (id) => {
+        let url = `cart/idProduct/${id}`;
+        return axiosClient.delete(url);
+    }
     addCart = (cart) => {
-        try {
             let url = "/cart";
             return axiosClient.post(url, cart);
-        } catch (e) {
-            console.log(e);
-        }
+       
     };
 }
-const CartAPI = new Cart();
+const cartsAPI = new Cart();
 
-export default CartAPI;
+export default cartsAPI;
+
