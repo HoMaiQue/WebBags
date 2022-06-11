@@ -11,6 +11,8 @@ let aContainer = document.querySelector("#a-container");
 let bContainer = document.querySelector("#b-container");
 let allButtons = document.querySelectorAll(".submit");
 
+let singUpBtn = document.querySelector(".sing-up-btn");
+
 let getButtons = (e) => e.preventDefault();
 
 let changeForm = (e) => {
@@ -74,3 +76,58 @@ signInBtn.addEventListener("click", () => {
     logIn(userNameValue, passwordValue);
 });
 
+// sing up
+
+// console.log(nameR)
+// console.log(userNameR)
+// console.log(passwordR)
+// console.log(addressR)
+// console.log(phoneR)
+//console.log(sexR)
+
+let nameV =""
+let userV =""
+let passwordV =""
+let addressV =""
+let phoneV =""
+let sexV   = 0
+
+// nameR.onchange = () => {
+//     nameR.value = nameV;
+// }
+// console.log(nameV)
+
+const singUp = async (name,userName, password,email,address, phone,sex) => {
+    try {
+        const customer = {
+            name:name,
+            username: userName,
+            password: password,
+            email:email,
+            addressCustomer:address,
+            phone:phone,
+            sex:sex,
+            idRole : 2,
+            status: 1
+        };
+        const result = await customersAPI.register(customer);
+        if (result.status == true) {
+            localStorage.clear()
+            alert("Đăng kí thành công mời bạn đăng nhập");
+        }
+        
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+singUpBtn.addEventListener("click", () => {
+    const nameR = document.querySelector(".sing-up-name").value;
+    const userNameR = document.querySelector(".sing-up-user-name").value;
+    const passwordR = document.querySelector(".sing-up-password").value;
+    const emailR = document.querySelector(".sing-up-email").value;
+    const addressR = document.querySelector(".sing-up-address").value;
+    const phoneR = document.querySelector(".sing-up-phone").value;
+    const sexR = document.querySelector(".sing-up-sex:checked").value;
+    singUp(nameR, userNameR,passwordR,emailR,addressR,phoneR,sexR);
+});
