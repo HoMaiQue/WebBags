@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+    <link rel="stylesheet" href="/css/rg.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="login" id="a-form" method="" action="">
+
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input name="name" type="text" class="login__input name" placeholder="Name" />
+                         
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-envelope"></i>
+                        <input name="email" type="email" class="login__input email" placeholder="Email" />
+                        
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-map-marker"></i>
+                        <input name="address_customer" type="text" class="login__input address_customer" placeholder="Address" />
+                        
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-phone"></i>
+                        <input name="phone" type="text" class="login__input phone" placeholder="Phone" />
+                        
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-genderless"></i>
+                        <select name="sex" class="form__input-sex login__input sex">
+                            <option class="login__input" value="0">Nam</option>
+                            <option class="login__input" value="1">Nữ</option>
+                        </select>
+                    </div>
+                    <button type="submit" name="change" class="button login__submit change">
+                        <span class="button__text">Sửa thông tin </span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </form>
+
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="module" src="./js/change-user.js"></script>
+
+</body>
+
+</html>

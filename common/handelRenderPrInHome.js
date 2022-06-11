@@ -1,38 +1,65 @@
 const handleRenderPrInHome = (datas, parentElement) => {
     const result = datas.map((product) => {
-        return `<div class="item-slick2 p-l-15 p-r-15">
-        <!-- Block2 -->
-        <div class="block2">
-            <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                <img src="images/item-03.jpg" alt="IMG-PRODUCT">
-
-                <div class="block2-overlay trans-0-4">
-                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                    </a>
-
-                    <div class="block2-btn-addcart w-size1 trans-0-4">
-                        <!-- Button -->
-                        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
+        return `<div class="owl-item">
+        <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+            <div class="bbb_viewed_image"><img src="images/item-02.jpg" alt=""></div>
+            <div class="bbb_viewed_content text-center">
+                <div class="bbb_viewed_price">$${product.price}</div>
+                <div class="bbb_viewed_name"><a href="/product-detail.html?id=${product.idProduct}">${product.title}</a></div>
             </div>
-
-            <div class="block2-txt p-t-20">
-                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                    ${product.title}
-                </a>
-
-                <span class="block2-price m-text6 p-r-5">
-                    $${product.price}
-                </span>
-            </div>
+            
         </div>
     </div>`;
     });
     parentElement.innerHTML = result.join("");
+
+    $(document).ready(function()
+{
+
+   
+        if($('.bbb_viewed_slider').length)
+        {
+            var viewedSlider = $('.bbb_viewed_slider');
+
+            viewedSlider.owlCarousel(
+            {
+                loop:true,
+                margin:30,
+                autoplay:true,
+                autoplayTimeout:6000,
+                nav:false,
+                dots:false,
+                responsive:
+                {
+                    0:{items:1},
+                    575:{items:2},
+                    768:{items:3},
+                    991:{items:4},
+                    1199:{items:6}
+                }
+            });
+
+            if($('.bbb_viewed_prev').length)
+            {
+                var prev = $('.bbb_viewed_prev');
+                prev.on('click', function()
+                {
+                    viewedSlider.trigger('prev.owl.carousel');
+                });
+            }
+
+            if($('.bbb_viewed_next').length)
+            {
+                var next = $('.bbb_viewed_next');
+                next.on('click', function()
+                {
+                    viewedSlider.trigger('next.owl.carousel');
+                });
+            }
+        }
+
+
+    });
+    
 };
 export default handleRenderPrInHome

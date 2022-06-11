@@ -126,3 +126,4 @@ const addCart = async (idUser, idProduct, quantity) => {
 // const cartBtn = document.querySelector(".cartBtn");
 // console.log(cartBtn)
 
+
