@@ -8,14 +8,16 @@ class Cart {
     deleteProductById = (id) => {
         let url = `cart/idProduct/${id}`;
         return axiosClient.delete(url);
-    }
+    };
     addCart = (cart) => {
-            let url = "/cart";
-            return axiosClient.post(url, cart);
-       
+        let url = "/cart";
+        return axiosClient.post(url, cart);
+    };
+    updateCart = (cart) => {
+        let url = "/cart";
+        return axiosClient.put(url, cart);
     };
 }
 const cartsAPI = new Cart();
 
 export default cartsAPI;
-

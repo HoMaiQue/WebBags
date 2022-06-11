@@ -8,7 +8,7 @@ const handleRenderProduct = (datas, parentElement, isSlickSlider = false) => {
         <!-- Block2 -->
         <div class="block2">
             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                <img src="images/item-01.jpg" alt="IMG-PRODUCT">
+                <img src="data:image/jpg;base64, ${product.image}" width="270" height="360"   alt="IMG-PRODUCT">
 
                 <div class="block2-overlay trans-0-4">
                     <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">

@@ -22,7 +22,7 @@ const getProduct = async () => {
 					<div class="slick3">
 						<div class="item-slick3" data-thumb="images/thumb-item-01.jpg">
 							<div class="wrap-pic-w">
-								<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+								<img src="data:image/jpg;base64, ${product.image}" width="500" height="600" alt="IMG-PRODUCT">
 							</div>
 						</div>
 					</div>
