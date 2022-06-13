@@ -6,6 +6,7 @@
             content="width=device-width, user-scalable=no, initial-scale=1.0"
         />
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="./css/login.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
@@ -43,7 +44,11 @@
                         class="form__input sing-up-name"
                         type="text"
                         placeholder="Họ tên " required/>
+                    <i class="err-name d-none" style="color:red ; margin-left: -55px ">Họ tên sai định dạng chỉ được sử dụng chữ cái</i>
                     <input class="form__input sing-up-user-name" type="text" placeholder="UserName" required/>
+                    <i  class="err-username d-none" style="color:red ; margin-left: -148px ">Username không được để trống</i>
+
+                    
                     
                     <input
                         class="form__input sing-up-email"
@@ -51,24 +56,32 @@
                         placeholder="Email"
                         required
                     />
+                    <i  class="err-email d-none" style="color:red ; margin-left: -220px ">Email sai định dạng</i>
+
                     <input
                         class="form__input sing-up-password"
                         type="password"
                         placeholder="Password"
                         required
                     />
+                    <i  class="err-password d-none" style="color:red ; margin-left: -148px ">Password không được để trống</i>
+
                     <input
                         class="form__input sing-up-address"
                         type="text"
                         placeholder="Địa chỉ"
                         required
                     />
+                    <i  class="err-address d-none" style="color:red ; margin-left: -158px ">Địa chỉ không được để trống</i>
+
                     <input
                         class="form__input sing-up-phone"
                         type="text"
                         placeholder="Số điện thoại"
                         required
                     />
+                    <i  class="err-phone d-none" style="color:red ; margin-left: -170px ">Số điện thoại sai định dạng</i>
+
                     <div class="radio-sex">
                          <span class="form__span"
                         >Giới tính : </span
@@ -103,11 +116,16 @@
                         type="text"
                         placeholder="UserName"
                     />
+                    <i  class="err-username-lg d-none" style="color:red ; margin-left: -148px ">Username không được để trống</i>
+
                     <input
                         class="form__input signIn-password"
                         type="password"
                         placeholder="Password"
-                    /><a class="form__link">Forgot your password?</a>
+                    />
+                    <i  class="err-password-lg d-none" style="color:red ; margin-left: -148px ">Password không được để trống</i>
+                    
+                    <!-- <a class="form__link">Forgot your password?</a> -->
                     <button class="form__button button submit signIn-btn">SIGN IN</button>
                 </form>
             </div>
