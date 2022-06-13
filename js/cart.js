@@ -1,19 +1,27 @@
+import billApi from "../api/billApi.js";
 import cartsAPI from "../api/cartApi.js";
+import handleDeleteProduct from "../common/handleDeleteProduct.js";
 import { getProductInCart } from "../common/handleRenderCart.js";
+import Toast from "../common/toast.js";
 
 const wrap_item = document.querySelector(".table-shopping-cart .wrap-item");
-console.log(wrap_item);
-const handleRenderProductInCart = async (callback) => {
+const handleRenderProductInCart = async () => {
     const productList = await getProductInCart();
-    if (productList.length <= 0) return;
+    if (productList.length <= 0) {
+        return
+    }
     const newProductList = productList.map((product) => {
-        return `  <tr class="table-row">
+        return `  <tr class="table-row cart-item " >
         <td class="column-1">
             <div
-                class="cart-img-product b-rad-4 o-f-hidden"
+                class="cart-img-product b-rad-4 o-f-hidden remove-product" data-product="${
+                    product.idProduct
+                }"
             >
                 <img
-                src="data:image/jpg;base64, ${product.image}" width="90" height="120"
+                src="data:image/jpg;base64, ${
+                    product.image
+                }" width="90" height="120"
                     alt="IMG-PRODUCT"
                 />
             </div>
@@ -62,13 +70,15 @@ const handleRenderProductInCart = async (callback) => {
     const num_productList = document.querySelectorAll(".num-product");
     const productPrices = document.querySelectorAll(".product-price");
     const totalPriceEl = document.querySelector(".total-price");
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
     let totalPriceBefore = 0;
     productPrices.forEach((product) => {
         const priceUpdate = +product.innerText.slice(2);
         totalPriceBefore += priceUpdate;
     });
     totalPriceEl.textContent = `$ ${totalPriceBefore}`;
+
     btnDownList.forEach((btnDown, index) => {
         btnDown.addEventListener("click", () => {
             let quantityChoice = +num_productList[index].value;
@@ -95,6 +105,11 @@ const handleRenderProductInCart = async (callback) => {
 
     const btn_updateCart = document.querySelector(".btn-Update-Cart");
     btn_updateCart.addEventListener("click", () => {
+        let cart_item = document.querySelectorAll(".cart-item")
+        if(cart_item && cart_item.length === 0){
+            Toast('Không có đơn hàng nào!')
+            return
+        }
         let totalPrice = 0;
         productPrices.forEach(async (product, index) => {
             const priceUpdate = +product.innerText.slice(2);
@@ -105,18 +120,26 @@ const handleRenderProductInCart = async (callback) => {
             }
 
             totalPrice += priceUpdate;
-            const quantity = +num_productList[index].value
+            const quantity = +num_productList[index].value;
             const cartItem = {
                 idUser: userInfo.idUser,
                 idProduct: idProduct,
-                quantity: quantity
-                
-            }
-            await cartsAPI.updateCart(cartItem)
+                quantity: quantity,
+            };
+            await cartsAPI.updateCart(cartItem);
         });
+        Toast("Cập nhật giỏ hàng thành công", "success");
         totalPriceEl.textContent = `$ ${totalPrice}`;
+        cart_item = null
     });
+
+    let cartItem_list_remove = document.querySelectorAll(
+        ".cart-item .remove-product"
+    );
+  
+    handleDeleteProduct(cartItem_list_remove);
 };
+
 const handleRenderInfoUser = () => {
     const address = document.querySelector(".address");
     const fullName = document.querySelector(".fullName");
@@ -128,28 +151,58 @@ const handleRenderInfoUser = () => {
         phoneNumber.textContent = infoUser.phone;
     }
 };
+const getDate = () => {
+    const d = new Date();
+    const mm = d.getMonth() + 1;
+    const dd = d.getDate();
+    const yy = d.getFullYear();
+    const myDateString = yy + "-" + mm + "-" + dd;
+    return myDateString;
+};
+const handleCreateBill = async () => {
+    const date = getDate();
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const product_price_El = document.querySelectorAll(".product-price");
+    const input_quantity_El = document.querySelectorAll(".num-product");
+    const bill = {
+        idUser: userInfo.idUser,
+        dateBill: date,
+        status: 0,
+    };
+    if(product_price_El.length ===0 || input_quantity_El.length ===0) {
+        Toast('không có đơn hàng nào ')
+        return
+    }
+    const resultBill = await billApi.createBill(bill);
+    if (resultBill) {
+       
+        product_price_El.forEach(async(item, index) => {
+            const idBill = resultBill.data; 
+            const idProduct = item.getAttribute('data-id')
+            const quantity = +input_quantity_El[index].value
+            const price = quantity * item.getAttribute('data-price')
+            const billDetail = {
+                idBill,
+                idProduct,
+                quantity,
+                price,
+            };
+            await billApi.createBillDetail(billDetail)
+        });
+        await cartsAPI.deleteCartByUserID(userInfo.idUser)
+        Toast("Bạn đã đặt hàng thành công", "success");
+        setTimeout(() => {
+            window.location.href = "purchase-order.html";
+        },1500) 
+    }
+};
+
 const orderProduct = document.querySelector(".order-product");
 console.log(orderProduct);
 const handleOrderProduct = () => {
-    orderProduct.addEventListener("click", () => {
-        Toastify({
-            text: "Bạn đã đặt hàng thành công",
-            className: "success",
-            duration: 1000,
-            style: {
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#2dd284",
-                height: "75px",
-                width: "300px",
-                borderRadius: "5px"
-            },
-            offset: {
-                x: "38em" ,
-                y: 10,
-            },
-        }).showToast();
+    orderProduct.addEventListener("click", async () => {
+        handleCreateBill();
+        
     });
 };
 handleOrderProduct();

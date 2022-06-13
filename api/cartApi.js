@@ -17,6 +17,10 @@ class Cart {
         let url = "/cart";
         return axiosClient.put(url, cart);
     };
+    deleteCartByUserID = (id) => {
+        let url = `cart/idUser/${id}`;
+        return axiosClient.delete(url);
+    }
 }
 const cartsAPI = new Cart();
 
