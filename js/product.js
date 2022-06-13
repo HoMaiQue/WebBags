@@ -95,7 +95,7 @@ const getAllBrand = async () => {
         const result = await brandApi.getAllBrand();
         const htmlCode = result.map((brand) => {
             return `<li class="p-t-4">
-            <a href="/product.html?idBrand=${brand.idBrand}" class="s-text13 active1">
+            <a href="product.html?idBrand=${brand.idBrand}" class="s-text13 active1">
                 ${brand.nameBrand}
             </a>
         </li>`

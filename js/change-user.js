@@ -160,7 +160,7 @@ changeBtn.addEventListener("click", () => {
     }
     else{
         change( userNameV,addressV,emailV,phoneV,sexV,nameV);
-        window.location.replace("/change-user.html");
+        window.location.replace("change-user.html");
         alert("Sửa thông tin thành công");
     }
 });

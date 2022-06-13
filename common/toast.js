@@ -2,8 +2,6 @@ const Toast = (message, className) => {
     let  background = '#2dd284';
     if(!className){
         background = '#FF0000'
-    }else {
-
     }
     Toastify({
         text: message,
