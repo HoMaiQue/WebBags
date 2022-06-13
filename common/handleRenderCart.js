@@ -1,5 +1,6 @@
 import cartsAPI from "../api/cartApi.js";
 import productsAPI from "../api/productApi.js";
+import handleDeleteProduct from "./handleDeleteProduct.js";
 
 const cart_list = document.querySelector(".header-cart-wrapitem");
 const cart_logo = document.querySelector(".cart-logo img");
@@ -14,7 +15,7 @@ export const getProductInCart = async () => {
                 cart.idProduct
             );
             if (productDetails && productDetails.length > 0) {
-                productDetails[0].quantityChoice = cart.quantity
+                productDetails[0].quantityChoice = cart.quantity;
                 productsInCart.push(productDetails[0]);
             }
         }
@@ -27,10 +28,10 @@ export const getProductInCart = async () => {
 const renderViewProduct = async (callback) => {
     const productList = await callback();
     if (productList.length <= 0) return;
-    console.log("first", productList)
+    console.log("first", productList);
     const newProductList = productList.map((product) => {
-        return ` <li class="header-cart-item cart-item" data-product="${product.idProduct}">
-            <div class="header-cart-item-img remove-product" >
+        return ` <li class="header-cart-item cart-item" >
+            <div class="header-cart-item-img remove-product" data-product="${product.idProduct}" >
                 <img src="data:image/jpg;base64, ${product.image}" width="80" height="80" alt="IMG">
             </div>
         
@@ -46,18 +47,12 @@ const renderViewProduct = async (callback) => {
          </li>`;
     });
     cart_list.innerHTML = newProductList.join("");
-    let cartItem_list = document.querySelectorAll(".cart-item");
-    cartItem_list.forEach((item) => {
-        item.addEventListener("click", async (e) => {
-            item.innerHTML = "";
-            const idProduct = item.dataset.product
-            await cartsAPI.deleteProductById(idProduct)
-        });
-    });
-   
+    let cartItem_list_remove = document.querySelectorAll(
+        ".cart-item .remove-product"
+    );
+    handleDeleteProduct(cartItem_list_remove);
 };
-renderViewProduct(getProductInCart);
-console.log(cart_logo)
+// renderViewProduct(getProductInCart);
 cart_logo.addEventListener("click", () => {
     renderViewProduct(getProductInCart);
 });

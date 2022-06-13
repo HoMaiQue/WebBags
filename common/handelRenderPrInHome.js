@@ -2,7 +2,7 @@ const handleRenderPrInHome = (datas, parentElement) => {
     const result = datas.map((product) => {
         return `<div class="owl-item">
         <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-            <div class="bbb_viewed_image"><img src="images/item-02.jpg" alt=""></div>
+            <div class="bbb_viewed_image"><img src="data:image/jpg;base64, ${product.image}" width="150" height="200"></div>
             <div class="bbb_viewed_content text-center">
                 <div class="bbb_viewed_price">$${product.price}</div>
                 <div class="bbb_viewed_name"><a href="/product-detail.html?id=${product.idProduct}">${product.title}</a></div>
