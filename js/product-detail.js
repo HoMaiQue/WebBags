@@ -1,5 +1,6 @@
 import productsAPI from "../api/productApi.js";
 import CartAPI from "../api/cartApi.js";
+import colorApi from "../api/colorApi.js";
  const products_container = document.querySelector(".detail-product");
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -7,22 +8,31 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
   });
 
 let value = params.id;
+
+let color=""
+
+const getColor = async () => {
+    try {
+        const result = await colorApi.getColorById(value);
+        color =result[0].nameColor;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+getColor();
+
 const getProduct = async () => {
     try {
-        const result = await productsAPI.getAllProduct();
+        const result = await productsAPI.getProductById(value);
         console.log(result);
         
-        console.log(value);
-
-        result.forEach(product => {
-            if (product.idProduct == value)
-            {
                 products_container.innerHTML = `<div class="w-size13 p-t-30 respon5">
 				<div class="wrap-slick3 flex-sb flex-w">
 					<div class="slick3">
 						<div class="item-slick3" data-thumb="images/thumb-item-01.jpg">
 							<div class="wrap-pic-w">
-								<img src="data:image/jpg;base64, ${product.image}" width="500" height="600" alt="IMG-PRODUCT">
+								<img src="data:image/jpg;base64, ${result[0].image}" width="500" height="600" alt="IMG-PRODUCT">
 							</div>
 						</div>
 					</div>
@@ -31,18 +41,18 @@ const getProduct = async () => {
 
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13">
-					${product.title}
+					${result[0].title}
 				</h4>
 
 				<span class="m-text17">
-					$${product.price}
+					$${result[0].price}
 				</span>
 				<!--  -->
 				<div class="p-t-33 p-b-60">
 					
 					<div class="flex-m flex-w">
 						<div class="s-text15 w-size15 t-center">
-							Color : Black
+							Màu sắc : ${color}
 						</div>
 					</div>
 
@@ -50,8 +60,17 @@ const getProduct = async () => {
 						<div class="w-size16 flex-m flex-w">
 							
 								<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-								<input type="number" class="quantity size8 m-text18" min="1" max="${product.quantity}" value="1"/>
-							</div>
+									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+									</button>
+
+									<input class="size8 m-text18 t-center num-product quantity" type="number" name="num-product" data-quantity="${result[0].quantity}" value="1" disabled>
+
+									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+									</button>
+								</div>
+							
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<!-- Button -->
 								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 cartBtn">
@@ -67,32 +86,72 @@ const getProduct = async () => {
 				<!--  -->
 				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-						Description
-						<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-						<i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+						Mô tả sản phẩm
+						
 					</h5>
 
 					<div class="dropdown-content p-t-15 p-b-23">
 						<p class="s-text8">
-							${product.descr}
+							${result[0].descr}
+						</p>
+					</div>
+
+					<div class="wrap-dropdown-content bo7 p-t-15 p-b-14 ">
+					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Chính sách đổi trả
+						
+					</h5>
+
+					<div class="dropdown-content p-t-15 p-b-23">
+						<p class="s-text8">
+							Khách hàng được đổi hoặc trả sản phẩm trong vòng 60 ngày kể từ ngày nhận được sản phẩm.
 						</p>
 					</div>
 				</div>
+
+				<div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+						Lưu ý
+					</h5>
+
+					<div class="dropdown-content p-t-15 p-b-23">
+						<p class="s-text8">
+						Chúng tôi có quyền quyết định dừng việc hỗ trợ đổi trả và trả lại tiền cho khách hàng nếu phát hiện khách hàng sử dụng chính sách để trục lợi (như việc đổi quá nhiều lần).
+						</p>
+					</div>
+				</div>
+				</div>
 			</div>`
-            }
-        })
+        
+
+		// handle btn quantity
+		const btnDown = document.querySelector(".btn-num-product-down");
+		const btnUp = document.querySelector(".btn-num-product-up");
+		const num_product = document.querySelector(".num-product");
+		
+		btnDown.addEventListener("click", () => {
+			if(num_product.value >1)
+			{
+				num_product.value--;
+			}
+            
+        });
+
+		btnUp.addEventListener("click", () => {
+            if(parseInt(num_product.value) < parseInt(num_product.getAttribute("data-quantity")))
+			{
+				num_product.value++;
+			}
+            
+        });
+
+
+		//
 
 		const cartBtn = document.querySelector(".cartBtn");
-		console.log(cartBtn);
-		
-		let quantity = document.querySelector(".quantity");
-		let sl = 1
-		quantity.onchange = () => {
-			sl = quantity.value 
-		}
-		console.log(quantity.value);
 		cartBtn.onclick = () => {
-			addCart (idUser,value,sl);
+			addCart (idUser,value, num_product.value);
+
 		}
 
     } catch (error) {

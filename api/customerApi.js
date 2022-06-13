@@ -29,6 +29,19 @@ class Customer {
             console.log(e);
         }
     };
+
+    changePassword = (account) => {
+        try {
+            let url = "/customer/change_pass";
+            return axiosClient.put(url,account);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    checkUser = (userName) => {
+        let url = `/customer/username/${userName}`;
+        return axiosClient.get(url);
+    };
 }
 const customersAPI = new Customer();
 
