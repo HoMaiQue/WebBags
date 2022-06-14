@@ -9,6 +9,10 @@ class Products {
         let url = `/product/${id}`;
         return axiosClient.get(url);
     }
+    deleteProductById = (id) => {
+        let url = `/product/${id}`
+        return axiosClient.delete(url);
+    }
 }
 const productsAPI = new Products();
 

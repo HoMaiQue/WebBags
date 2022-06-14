@@ -5,6 +5,10 @@ class Color {
         let url = `/color/${id}`;
         return axiosClient.get(url);
     }
+    getAllColor = ()=> {
+        let url = "/color";
+        return axiosClient.get(url);
+    }
 }
 const colorApi = new Color();
 

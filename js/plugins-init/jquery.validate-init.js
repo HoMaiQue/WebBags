@@ -1,10 +1,10 @@
 jQuery(".form-valide").validate({
     rules: {
-        "val-username": {
+        "val-title": {
             required: !0,
             minlength: 3
         },
-        "val-email": {
+        "val-image": {
             required: !0,
             email: !0
         },
@@ -59,11 +59,11 @@ jQuery(".form-valide").validate({
         }
     },
     messages: {
-        "val-username": {
-            required: "Please enter a username",
+        "val-title": {
+            required: "Please enter a title",
             minlength: "Your username must consist of at least 3 characters"
         },
-        "val-email": "Please enter a valid email address",
+        "val-image": "Please enter a valid image",
         "val-password": {
             required: "Please provide a password",
             minlength: "Your password must be at least 5 characters long"
@@ -103,7 +103,7 @@ jQuery(".form-valide").validate({
 
 jQuery(".form-valide-with-icon").validate({
     rules: {
-        "val-username": {
+        "val-title": {
             required: !0,
             minlength: 3
         },
@@ -113,9 +113,9 @@ jQuery(".form-valide-with-icon").validate({
         }
     },
     messages: {
-        "val-username": {
-            required: "Please enter a username",
-            minlength: "Your username must consist of at least 3 characters"
+        "val-title": {
+            required: "Please enter a title",
+            minlength: "Your title must consist of at least 3 characters"
         },
         "val-password": {
             required: "Please provide a password",
