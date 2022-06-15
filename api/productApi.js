@@ -13,6 +13,16 @@ class Products {
         let url = `/product/${id}`
         return axiosClient.delete(url);
     }
+
+    createProduct = (product) => {
+        let url = `/product`
+        return axiosClient.post(url, product)
+    }
+
+    updateProduct = (id,product) => {
+        let url = `/product/${id}`
+        return axiosClient.put(url, product)
+    }
 }
 const productsAPI = new Products();
 

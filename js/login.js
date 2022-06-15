@@ -61,10 +61,12 @@ const logIn = async (userName, password) => {
         };
         const result = await customersAPI.login(account);
         if (result && result.length > 0) {
-            if (result[0].idRole === 1) {
-            }
             localStorage.clear()
             localStorage.setItem("userInfo", JSON.stringify(result[0]));
+            if (result[0].idRole === 1) {
+                window.location.href = "adminProduct.html";
+                return
+            }
             window.location.href = "index.html";
             userNameEl.value = "";
             passwordEl.value = "";
