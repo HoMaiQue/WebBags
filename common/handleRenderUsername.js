@@ -20,7 +20,9 @@ if (userInfo) {
     }
    
 }
+console.log(logOut)
 logOut.addEventListener("click", () => {
+    console.log(123)
     localStorage.clear();
     window.location.href = "index.html";
 });
