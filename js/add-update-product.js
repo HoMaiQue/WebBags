@@ -126,36 +126,39 @@ getValueInput(selectColor, "idColor");
 const handleSubmit = (data, btnSubmit) => {
     if (btnSubmit) {
         btnSubmit.addEventListener("click", async (e) => {
+            console.log(123)
             try {
-                e.preventDefault();
+                // e.preventDefault();
                 data.image = base64String;
                 const params = new URLSearchParams(window.location.search);
                 if (params.has("idProduct")) {
                     const id = params.get("idProduct");
                     const resProductById = await productsAPI.getProductById(id);
-                    if (resProductById && resProductById.length > 0){
+                    if (resProductById && resProductById.length > 0) {
                         for (const key in data) {
                             if (!data[key]) {
                                 delete data[key];
                             }
                         }
-                        console.log(data)
-                        data = {...resProductById[0],...data}
-                        delete data.idProduct
-                        console.log(data)
+                        data = { ...resProductById[0], ...data };
+                        delete data.idProduct;
                     }
                     const res = await productsAPI.updateProduct(id, data);
+
                     if (res && res.status) {
                         Toast("Cập nhật sản phẩm thành công", "success");
                     } else {
-                        Toast("Cập nhật sản phẩm thành công", "success");
+                        Toast("Cập nhật sản phẩm thất bại");
+                        return;
                     }
                 } else {
                     const res = await productsAPI.createProduct(data);
+
                     if (res && res.status) {
                         Toast("Thêm sản phẩm thành công", "success");
                     } else {
-                        Toast("Thêm sản phẩm thất bại", "success");
+                        Toast("Thêm sản phẩm thất bại");
+                        return;
                     }
                 }
                 setTimeout(() => {

@@ -5,6 +5,10 @@ import { getProductInCart } from "../common/handleRenderCart.js";
 import Toast from "../common/toast.js";
 
 const wrap_item = document.querySelector(".table-shopping-cart .wrap-item");
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+if(!userInfo) {
+	window.location.href = "login.html"
+}
 const handleRenderProductInCart = async () => {
     const productList = await getProductInCart();
     if (productList.length <= 0) {

@@ -1,4 +1,9 @@
+
 jQuery(".form-valide").validate({
+    submitHandler: function (form, event) {
+        event.preventDefault();
+     
+    },
     ignore: [],
     errorClass: "invalid-feedback animated fadeInDown",
     errorElement: "div",
@@ -25,11 +30,11 @@ jQuery(".form-valide").validate({
         "val-suggestions": { required: !0, minlength: 5 },
         "val-brand": { required: !0 },
         "val-color": { required: !0 },
-        "val-price": { required: !0,  number: !0},
+        "val-price": { required: !0, number: !0 },
         "val-website": { required: !0, url: !0 },
         "val-phoneus": { required: !0, phoneUS: !0 },
         "val-digits": { required: !0, digits: !0 },
-        "val-number": { required: !0, number: !0},
+        "val-number": { required: !0, number: !0 },
         "val-range": { required: !0, range: [1, 5] },
         "val-terms": { required: !0 },
     },

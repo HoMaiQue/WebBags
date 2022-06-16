@@ -4,15 +4,18 @@ const register = document.querySelector(".register");
 const userName = document.querySelector(".user-name");
 const changeInfo = document.querySelector(".change-info");
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+const purchaseOrder = document.querySelector(".purchase-order");
+
 if (userInfo) {
     logIn_link.style.display = "none";
     register.style.display = "none";
     userName.innerHTML = userInfo.username;
 } else {
-    logOut.style.display = "none";changeInfo.style.display = "none"
+    logOut.style.display = "none";
+    changeInfo.style.display = "none";
+    purchaseOrder.style.display = "none";
 }
 logOut.addEventListener("click", () => {
     localStorage.clear();
     window.location.href = "index.html";
 });
-

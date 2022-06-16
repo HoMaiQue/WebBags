@@ -9,6 +9,10 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
   });
 
 let value = params.id;
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+if(!userInfo) {
+	window.location.href = "login.html"
+}
 
 let color=""
 

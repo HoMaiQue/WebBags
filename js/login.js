@@ -53,16 +53,26 @@ passwordEl.addEventListener("change", () => {
     passwordValue = passwordEl.value;
 });
 const logIn = async (userName, password) => {
-    if (!userName || !password) return;
+    if (!userName || !password) {
+        Toast('Sai thông tin đăng nhập')
+        return
+    };
     try {
         const account = {
             username: userName,
             password: password,
         };
         const result = await customersAPI.login(account);
+        
         if (result && result.length > 0) {
+
             localStorage.clear()
             localStorage.setItem("userInfo", JSON.stringify(result[0]));
+            if(result[0].status === 0 ){
+                Toast('Sai thông tin đăng nhập')
+                localStorage.clear()
+                return
+            }
             if (result[0].idRole === 1) {
                 window.location.href = "adminProduct.html";
                 return
@@ -70,6 +80,10 @@ const logIn = async (userName, password) => {
             window.location.href = "index.html";
             userNameEl.value = "";
             passwordEl.value = "";
+        }else {
+           
+                Toast('Sai thông tin đăng nhập')
+           
         }
     } catch (e) {
         console.log(e);
@@ -167,11 +181,11 @@ const checkUser = async (userName) => {
         console.log(e);
     }
 };
-console.log(checkUser("1vtb").then(data => {
-    console.log(data.length);
-}).catch(err => {
-    console.log(err);
-}))
+// console.log(checkUser("1vtb").then(data => {
+//     console.log(data.length);
+// }).catch(err => {
+//     console.log(err);
+// }))
 singUpBtn.addEventListener("click", () => {
     const nameR = document.querySelector(".sing-up-name");
     const userNameR = document.querySelector(".sing-up-user-name");
