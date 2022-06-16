@@ -7,13 +7,18 @@ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 const purchaseOrder = document.querySelector(".purchase-order");
 
 if (userInfo) {
-    logIn_link.style.display = "none";
-    register.style.display = "none";
+    if(logIn_link && register){
+        logIn_link.style.display = "none";
+        register.style.display = "none";
+    }
     userName.innerHTML = userInfo.username;
 } else {
-    logOut.style.display = "none";
-    changeInfo.style.display = "none";
-    purchaseOrder.style.display = "none";
+    if(logOut && changeInfo && purchaseOrder){
+        logOut.style.display = "none";
+        changeInfo.style.display = "none";
+        purchaseOrder.style.display = "none";
+    }
+   
 }
 logOut.addEventListener("click", () => {
     localStorage.clear();

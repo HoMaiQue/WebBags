@@ -72,101 +72,26 @@
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
                     </div>
                 </div>
-                <div class="header-left">
-                    <div class="input-group icons">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i
-                                    class="mdi mdi-magnify"></i></span>
-                        </div>
-                        <div class="drop-down animated flipInX d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            
                 <div class="header-right">
                     <ul class="clearfix">
-
-
-
-                        <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
-                            <div class="dropdown-content-heading d-flex justify-content-between">
-                                <span class="">2 New Notifications</span>
-                                <a href="javascript:void()" class="d-inline-block">
-                                    <span class="badge badge-pill gradient-2">5</span>
-                                </a>
-                            </div>
-                            <div class="dropdown-content-body">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <span class="mr-3 avatar-icon bg-success-lighten-2"><i
-                                                    class="icon-present"></i></span>
-                                            <div class="notification-content">
-                                                <h6 class="notification-heading">Events near you</h6>
-                                                <span class="notification-text">Within next 5 days</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <span class="mr-3 avatar-icon bg-danger-lighten-2"><i
-                                                    class="icon-present"></i></span>
-                                            <div class="notification-content">
-                                                <h6 class="notification-heading">Event Started</h6>
-                                                <span class="notification-text">One hour ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <span class="mr-3 avatar-icon bg-success-lighten-2"><i
-                                                    class="icon-present"></i></span>
-                                            <div class="notification-content">
-                                                <h6 class="notification-heading">Event Ended Successfully</h6>
-                                                <span class="notification-text">One hour ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <span class="mr-3 avatar-icon bg-danger-lighten-2"><i
-                                                    class="icon-present"></i></span>
-                                            <div class="notification-content">
-                                                <h6 class="notification-heading">Events to Join</h6>
-                                                <span class="notification-text">After two days</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                        </li>
+                      
                         <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                                <span>homaique</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                <span class="user-name">homaique</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()">English</a></li>
-                                        <li><a href="javascript:void()">Dutch</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                          
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
-
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                                        <li><a href=""><i class="icon-key log-out"></i> <span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -328,7 +253,9 @@
     
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script type="module" src="./js/admin-bill-detail.js"></script>"
+    <script type="module" src="./js/admin-bill-detail.js"></script>
+    <script type="module" src="./common/handleRenderUsername.js"></script>
+
 
 </body>
 
