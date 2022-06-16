@@ -17,6 +17,26 @@ class Bill {
         let url = `/bill_detail/${id}`
         return axiosClient.get(url)
     }
+    getMoney =(year) => {
+        let url = `/bill/statistic_revenue/${year}`
+        return axiosClient.get(url)
+    }
+    getYear =() => {
+        let url = "/bill/year_bill"
+        return axiosClient.get(url)
+    }
+    getAllBill = () => {
+        let url = "/bill";
+        return axiosClient.get(url);
+    };
+    comfirmBill = (id) => {
+        try {
+            let url = `/bill/${id}`;
+            return axiosClient.put(url);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 }
 const billApi = new Bill();
 

@@ -1,6 +1,6 @@
 import productsAPI from "../api/productApi.js";
 import handleRenderPrInHome from "../common/handelRenderPrInHome.js";
-const products_container = document.querySelector(".slide-produce");
+const products_container = document.querySelector(".owl-carousel");
 
 const getAllProductsInHome = async () => {
     try {
@@ -8,6 +8,9 @@ const getAllProductsInHome = async () => {
 
         handleRenderPrInHome(result, products_container);
 
+        const newProductImg = document.querySelector(".new-product");
+        console.log(newProductImg);
+        newProductImg.src = `data:image/jpg;base64, ${result[result.length - 1].image}`;
         const newProductName = document.querySelector(".new_product_name");
         newProductName.innerText = result[result.length - 1].title;
         const newProductTitle = document.querySelector(".new_product_price");

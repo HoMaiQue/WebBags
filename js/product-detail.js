@@ -2,6 +2,7 @@ import productsAPI from "../api/productApi.js";
 import CartAPI from "../api/cartApi.js";
 import colorApi from "../api/colorApi.js";
  const products_container = document.querySelector(".detail-product");
+ import Toast from "../common/toast.js";
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
@@ -84,8 +85,8 @@ const getProduct = async () => {
 					</div>
 				</div>
 				<!--  -->
-				<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
-					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+				<div class="wrap-dropdown-content p-t-15 p-b-14 active-dropdown-content">
+					<h5 class="js-toggle-dropdown-content  flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 						Mô tả sản phẩm
 						
 					</h5>
@@ -96,7 +97,7 @@ const getProduct = async () => {
 						</p>
 					</div>
 
-					<div class="wrap-dropdown-content bo7 p-t-15 p-b-14 ">
+					<div class="wrap-dropdown-content bo6 p-t-15 p-b-14 ">
 					<h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
 						Chính sách đổi trả
 						
@@ -151,6 +152,7 @@ const getProduct = async () => {
 		const cartBtn = document.querySelector(".cartBtn");
 		cartBtn.onclick = () => {
 			addCart (idUser,value, num_product.value);
+			num_product.value=1
 
 		}
 
@@ -174,13 +176,22 @@ const addCart = async (idUser, idProduct, quantity) => {
 			quantity: quantity
         };
         const result = await CartAPI.addCart(cart);
-        if (result && result.length > 0) {
-            console.log("add cart success");
-        }
+		console.log(result)
+        if (result.status == true)
+		{
+			Toast("Thêm sản phẩm thành công", "success");
+		}
+		else if (result.code == "ER_DUP_ENTRY")
+		{
+			Toast("Sản phẩm đã có trong giỏ hàng");
+		}
+
     } catch (e) {
         console.log(e);
     }
 };
+
+export default addCart
 
 // const cartBtn = document.querySelector(".cartBtn");
 // console.log(cartBtn)

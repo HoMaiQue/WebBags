@@ -34,18 +34,13 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
-	<link rel="stylesheet" type="text/css" href="css/slide.css"> -->
-<!--===============================================================================================-->
-<!-- newslide -->
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/tooplate-main.css">
-	<link rel="stylesheet" href="css/owl.css">
+	<link rel="stylesheet" type="text/css" href="css/slide.css">
 	<style>
-		.img-product-slide{
-			width: 220.500px !important;
-			height: 239.663px;
+		.new-product{
+			width: 570px;
+			height: 426.7px;
 		}
 	</style>
 </head>
@@ -494,64 +489,26 @@
 	<!-- New Product -->
 	<section class="newproduct bgwhite p-t-10 p-b-105">
 		<div class="container">
-			<!-- <div class="sec-title p-b-60">
-				<h3 class="m-text5 t-center">
-					Featured Products
-				</h3>
-			</div> -->
-
-			<!-- Slide2 -->
-			<!-- <div class="wrap-slick2">
-				<div class="slick2 products-container"> -->
-					<div class="row">
-						<div class="col-md-12">
-						  <div class="section-heading">
-							<div class="line-dec"></div>
-							<h1>Featured Items</h1>
-						  </div>
-						</div>
-						<div class="col-md-12">
-						  <div class="owl-carousel owl-theme slide-produce">
-							
-						  </div>
-						</div>
-					  </div>
-
-					<!-- <div class="item-slick2 p-l-15 p-r-15">
-						
-						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-								<img src="images/item-02.jpg" alt="IMG-PRODUCT">
-
-								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
-
-									<div class="block2-btn-addcart w-size1 trans-0-4">
-									
-										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Add to Cart
-										</button>
-									</div>
-								</div>
+			<div class="row">
+				<div class="col">
+					<div class="bbb_main_container">
+						<div class="bbb_viewed_title_container">
+							<h3 class="bbb_viewed_title">Features products</h3>
+							<div class="bbb_viewed_nav_container">
+								<div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+								<div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
 							</div>
+						</div>	
 
-							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-									Herschel supply co 25l
-								</a>
+						<div class="bbb_viewed_slider_container">
+							<div class="owl-carousel owl-theme bbb_viewed_slider">
 
-								<span class="block2-price m-text6 p-r-5">
-									$75.00
-								</span>
 							</div>
 						</div>
-					</div> -->
-					
-				<!-- </div>
-			</div> -->
+					</div>
+
+				</div>
+			</div>
 
 		</div>
 	</section>
@@ -580,7 +537,7 @@
 
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="images/shop-item-09.jpg" alt="IMG-BANNER">
+						<img class="new-product" src="images/shop-item-09.jpg" alt="IMG-BANNER">
 
 						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
 							<div class="t-center">
@@ -965,38 +922,19 @@
 	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
-	<!-- <script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
-	<!-- <script src="vendor/slide/bootstrap.bundle.min.js"></script> -->
-	<script src="vendor/slide/owl.js"></script>
-	<script src="vendor/slide/custom.js"></script>
-	<!-- <script src="https://kit.fontawesome.com/0c2db3ef80.js" crossorigin="anonymous"></script> -->
-
-	<script type="module" src="./common/handleRenderCart.js"></script>
-	<script src="./common/handleRenderUsername.js"></script>
-	
 	<script type="module" src="./js/home.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+
+	
+	<script src="./common/handleRenderUsername.js"></script>
+	<script src="https://kit.fontawesome.com/0c2db3ef80.js" crossorigin="anonymous"></script>
+	
+	
 
 </body>
 </html>

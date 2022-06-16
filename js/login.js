@@ -1,7 +1,7 @@
-
-
 import customersAPI from "../api/customerApi.js";
 import validate from "../common/validate.js";
+import Toast from "../common/toast.js";
+
 
 let switchCtn = document.querySelector("#switch-cnt");
 let switchC1 = document.querySelector("#switch-c1");
@@ -140,7 +140,8 @@ const singUp = async (name,userName, password,email,address, phone,sex) => {
         const result = await customersAPI.register(customer);
         if (result.status == true) {
             localStorage.clear()
-            alert("Đăng kí thành công mời bạn đăng nhập");
+            // alert("Đăng kí thành công mời bạn đăng nhập");
+            Toast("Đăng kí thành công mời bạn đăng nhập", "success");
         }
         
     } catch (e) {
@@ -151,27 +152,32 @@ const singUp = async (name,userName, password,email,address, phone,sex) => {
 const checkUser = async (userName) => {
     try {
         const result = await customersAPI.checkUser(userName);
-        if(result.length==1)
-        {
-           return true
-        }
-        else{
-            return false
-        }
+        // if(result.length==1)
+        // {
+        //    return true
+        // }
+        // else{
+        //     return false
+        // }
+        return result;
         
     } catch (e) {
         console.log(e);
     }
 };
-console.log(checkUser("vtb"))
+console.log(checkUser("1vtb").then(data => {
+    console.log(data.length);
+}).catch(err => {
+    console.log(err);
+}))
 singUpBtn.addEventListener("click", () => {
-    const nameR = document.querySelector(".sing-up-name").value;
-    const userNameR = document.querySelector(".sing-up-user-name").value;
-    const passwordR = document.querySelector(".sing-up-password").value;
-    const emailR = document.querySelector(".sing-up-email").value;
-    const addressR = document.querySelector(".sing-up-address").value;
-    const phoneR = document.querySelector(".sing-up-phone").value;
-    const sexR = document.querySelector(".sing-up-sex:checked").value;
+    const nameR = document.querySelector(".sing-up-name");
+    const userNameR = document.querySelector(".sing-up-user-name");
+    const passwordR = document.querySelector(".sing-up-password");
+    const emailR = document.querySelector(".sing-up-email");
+    const addressR = document.querySelector(".sing-up-address");
+    const phoneR = document.querySelector(".sing-up-phone");
+    const sexR = document.querySelector(".sing-up-sex:checked");
     const errNameText = document.querySelector(".err-name");
     const errUsernameText = document.querySelector(".err-username");
     const errPasswordText = document.querySelector(".err-password");
@@ -180,7 +186,7 @@ singUpBtn.addEventListener("click", () => {
     const errAddressText = document.querySelector(".err-address");
 
     let errName,errUsername,errPassword,errEmail,errPhone,errAddress;
-    if (!validate.name(nameR)) {
+    if (!validate.name(nameR.value)) {
         errName = true;
         errNameText.classList.remove("d-none");
     }
@@ -189,7 +195,7 @@ singUpBtn.addEventListener("click", () => {
         errNameText.classList.add("d-none");
     }
 
-    if (!validate.notNull(userNameR)) {
+    if (!validate.notNull(userNameR.value)) {
         errUsername = true;
         errUsernameText.classList.remove("d-none");
     }
@@ -198,7 +204,7 @@ singUpBtn.addEventListener("click", () => {
         errUsernameText.classList.add("d-none");
     }
     
-    if (!validate.notNull(passwordR)) {
+    if (!validate.notNull(passwordR.value)) {
         errPassword = true;
         errPasswordText.classList.remove("d-none");
     }
@@ -207,7 +213,7 @@ singUpBtn.addEventListener("click", () => {
         errPasswordText.classList.add("d-none");
     }
 
-    if (!validate.email(emailR)) {
+    if (!validate.email(emailR.value)) {
         errEmail = true;
         errEmailText.classList.remove("d-none");
     }
@@ -216,7 +222,7 @@ singUpBtn.addEventListener("click", () => {
         errEmailText.classList.add("d-none");
     }
 
-    if (!validate.phone(phoneR)) {
+    if (!validate.phone(phoneR.value)) {
         errPhone = true;
         errPhoneText.classList.remove("d-none");
     }
@@ -225,7 +231,7 @@ singUpBtn.addEventListener("click", () => {
         errPhoneText.classList.add("d-none");
     }
 
-    if (!validate.notNull(addressR)) {
+    if (!validate.notNull(addressR.value)) {
         errAddress = true;
         errAddressText.classList.remove("d-none");
     }
@@ -234,21 +240,39 @@ singUpBtn.addEventListener("click", () => {
         errAddressText.classList.add("d-none");
     }
 
-    // if (checkUser(userNameR) )
+    // if (checkUser(userNameR).then  )
     // {
     //     console.log(userNameR)
     //     alert("Tên tài khoản đã tồn tại")
     //     return;
     // }
+    
 
     if(errName || errEmail || errPhone || errUsername || errPassword || errAddress  )
     {
         return;
     }
-    else{
-        singUp(nameR, userNameR,passwordR,emailR,addressR,phoneR,sexR);
-        window.location.replace("/login.html");
-        alert("Đăng kí thành công mời bạn đăng nhập");
-    }
+
+    checkUser(userNameR.value).then (data => {
+        console.log(data.length)
+        if (data.length >0) {
+            Toast("Tên tài khoản đã tồn tại")
+            return;
+        }
+        else{
+            singUp(nameR.value, userNameR.value,passwordR.value,emailR.value,addressR.value,phoneR.value,sexR.value);
+            //window.location.replace("/login.html");
+            nameR.value="";
+            userNameR.value="";
+            passwordR.value="";
+            emailR.value="";
+            addressR.value="";
+            phoneR.value="";
+            
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
 });
