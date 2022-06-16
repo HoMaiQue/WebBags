@@ -1,6 +1,8 @@
 import productsAPI from "../api/productApi.js";
 import brandApi from "../api/brandApi.js";
 import handleRenderProduct from "../common/handleRenderProduct.js";
+import addCart from "../js/product-detail.js";
+
 const products_container = document.querySelector(".products-container");
 const brandList = document.querySelector(".brand-list");
 const productInput = document.querySelector(".search-product-input");
@@ -80,6 +82,25 @@ const getAllProducts = async () => {
             })
             console.log(filterResult)
             handleRenderProduct(filterResult, products_container);
+        })
+
+        // add one cart
+
+        const btnAddCart = document.querySelectorAll(".add-cart-btn")
+        console.log(btnAddCart[0].value)
+
+        let idUser = localStorage.getItem("userInfo");
+
+
+        let infoUser = JSON.parse(idUser)
+
+        console.log(infoUser.idUser)
+
+
+        btnAddCart.forEach( item => {
+            item.addEventListener("click",() =>{
+                addCart(infoUser.idUser, item.value, 1);
+            } )
         })
 
         

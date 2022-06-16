@@ -1,6 +1,6 @@
 class Validate {
     name = (value) => {
-        return /^[A-Za-z ]+$/.test(value)
+        return /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]+$/.test(value)
     }
 
     phone = (value) => {

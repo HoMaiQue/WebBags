@@ -1,5 +1,7 @@
 import customersAPI from "../api/customerApi.js";
 import validate from "../common/validate.js";
+import Toast from "../common/toast.js";
+
 
 let infoUserString = localStorage.getItem("userInfo");
 
@@ -97,7 +99,7 @@ const change = async (userName,address, email, phone,sex,name) => {
         const result = await customersAPI.change(customer,idUser);
         console.log(result.status);
         if (result.status == true) {
-            alert("Đổi thông tin thành công");
+            Toast("Sửa thông tin thành công", "success");
             
         }
         
@@ -160,8 +162,9 @@ changeBtn.addEventListener("click", () => {
     }
     else{
         change( userNameV,addressV,emailV,phoneV,sexV,nameV);
-        window.location.replace("change-user.html");
-        alert("Sửa thông tin thành công");
+        
+        //window.location.replace("change-user.html");
+        
     }
 });
 
@@ -216,13 +219,14 @@ changePasswordBtn.addEventListener("click", () =>{
     }
     console.log(userPassword)
     if(oldPassword != userPassword){
-        alert("Bạn nhập sai password")
+        Toast("Bạn nhập sai password cũ");
         return
     }
 
     if(newPassword != checkNewPassword)
     {
-        alert("Mật khẩu mới và mật khẩu xác thực phải giống nhau")
+        Toast("Mật khẩu mới và mật khẩu xác thực phải giống nhau");
+
         return
     }
 
@@ -236,7 +240,7 @@ changePasswordBtn.addEventListener("click", () =>{
 
         changePassword(userNameV,newPassword)
         window.location.replace("/change-user.html");
-        alert("Đổi mật khẩu thành công");
+        Toast("Đổi mật khẩu thành công", "success");
     }
 
 

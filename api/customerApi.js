@@ -42,6 +42,27 @@ class Customer {
         let url = `/customer/username/${userName}`;
         return axiosClient.get(url);
     };
+    getAllCustomer = () => {
+        let url = "/customer";
+        return axiosClient.get(url);
+    };
+    block = (id) => {
+        try {
+            let url = `/customer/block/${id}`;
+            return axiosClient.put(url);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    unBlock = (id) => {
+        try {
+            let url = `/customer/unblock/${id}`;
+            return axiosClient.put(url);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
 }
 const customersAPI = new Customer();
 
