@@ -74,7 +74,7 @@ const logIn = async (userName, password) => {
                 return
             }
             if (result[0].idRole === 1) {
-                window.location.href = "adminProduct.html";
+                window.location.href = "admin.html";
                 return
             }
             window.location.href = "index.html";
